@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template, send_from_directory
 import os
 import json
 import glob
@@ -26,7 +26,7 @@ def upload():
         is_ajax = True
 
     # Target folder for these uploads.
-    target = "uploader/static/uploads/{}".format(upload_key)
+    target = "uploads/{}".format(upload_key)
     try:
         os.mkdir(target)
     except:
@@ -57,7 +57,7 @@ def upload_complete(uuid):
     """The location we send them to at the end of the upload."""
 
     # Get their files.
-    root = "uploader/static/uploads/{}".format(uuid)
+    root = "uploads/{}".format(uuid)
     if not os.path.isdir(root):
         return "Error: UUID not found!"
 
@@ -71,6 +71,9 @@ def upload_complete(uuid):
         files=files,
     )
 
+@app.route('/uploads/<path:filename>')
+def uploads(filename):
+    return send_from_directory(app.root_path + '/../uploads/', filename)
 
 def ajax_response(status, msg):
     status_code = "ok" if status else "error"

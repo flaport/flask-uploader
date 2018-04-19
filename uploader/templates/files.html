@@ -16,7 +16,7 @@ values were submitted to the server.<p>
 
 {% for file in files %}
     <h2>{{ file }}</h2>
-    <img src="{{ url_for('static', filename='uploads/{}/{}'.format(uuid, file)) }}">
+    <img src="{{ url_for('uploads', filename='{}/{}'.format(uuid, file)) }}">
 {% endfor %}
 
 </body>

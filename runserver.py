@@ -2,8 +2,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
 import sys
 import argparse
+
+if not os.path.isdir('uploads'):
+    os.mkdir('uploads')
 
 from uploader.app import app
 
@@ -23,6 +27,7 @@ if __name__ == '__main__':
         port=args.port,
         threaded=True,
     )
+    print(app.root_path)
 
     app.run(**flask_options)
 
