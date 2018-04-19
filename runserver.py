@@ -5,14 +5,14 @@ from __future__ import unicode_literals
 import sys
 import argparse
 
-from uploadr.app import app
+from uploader.app import app
 
-parser = argparse.ArgumentParser(description="Uploadr")
+parser = argparse.ArgumentParser(description="uploader")
 parser.add_argument(
     "--port", "-p",
     type=int,
     help="Port to listen on",
-    default=2006,
+    default=80,
 )
 args = parser.parse_args()
 
